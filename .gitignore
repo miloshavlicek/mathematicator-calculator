@@ -4,3 +4,4 @@ log/*
 temp/*
 vendor/*
 composer.lock
+coverage.xml
