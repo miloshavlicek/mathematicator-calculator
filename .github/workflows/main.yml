@@ -41,3 +41,12 @@ jobs:
 
     - name: Run tests
       run: vendor/bin/tester -s -c tests/php.ini -p php tests --coverage coverage.xml --coverage-src src
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
