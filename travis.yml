@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer update --no-interaction --prefer-dist
+
+script:
+  - vendor/bin/phpstan analyse src -c phpstan.neon --level 6 --no-progress
+  - vendor/bin/tester -s -c tests/php.ini -p php tests
+
+after_failure:
+  - 'for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
